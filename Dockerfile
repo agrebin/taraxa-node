@@ -1,4 +1,5 @@
 # Default output dir containing build artifacts
+
 ARG BUILD_OUTPUT_DIR=cmake-docker-build-debug
 
 #############################################
