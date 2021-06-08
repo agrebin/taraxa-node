@@ -374,6 +374,9 @@ workflows:
     jobs:
       - build-and-push-docker-image:
          context: taraxa-node
+         filters:
+          branches:
+            only: [ cucumelo ]
 
   create-builder-image:
     jobs:
