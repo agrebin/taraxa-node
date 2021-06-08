@@ -1,3 +1,4 @@
+name: khan-deploy
 on:
   pull_request:
     types: [opened]
