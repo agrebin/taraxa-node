@@ -21,8 +21,6 @@ parameters:
     default: ""
     type: string
   
-
-
 orbs:
   git: opuscapita/git@0.0.3
   github-release: izumin5210/github-release@0.1.1
@@ -473,8 +471,8 @@ workflows:
   redeploy-prnet:
     when: 
       and: 
+
         - equal: [ true, << pipeline.parameters.deploy_prnet >> ]
-        - equal: [ true, << pipeline.parameters.redeploy_prnet >> ]
         - << pipeline.parameters.pr_number >>
     jobs:
      - redeploy-prnet:
@@ -484,7 +482,6 @@ workflows:
     when: 
       and: 
         - equal: [ true, << pipeline.parameters.deploy_prnet >> ]
-        - equal: [ true, << pipeline.parameters.cleanup_prnet >> ]
         - << pipeline.parameters.pr_number >>
     jobs:
      - cleanup-prnet:
