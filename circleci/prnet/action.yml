@@ -1,4 +1,4 @@
-name: 'Trigger Circleci pipelines'
+name: 'Trigger Circleci pipelines '
 description: 'Triggers circleci pr nets'
 inputs:
   action:  # id of input
