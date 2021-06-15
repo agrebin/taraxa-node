@@ -55,6 +55,22 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
+     - name: GitHub API Request
+        if: steps.check.outputs.triggered == 'true'
+        id: request
+        uses: octokit/request-action@v2.0.0
+        with:
+          route: ${{ github.event.issue.pull_request.url }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get PR informations
+        if: steps.check.outputs.triggered == 'true'
+        id: pr_data
+        run: |
+          echo "::set-output name=branch::${{ fromJson(steps.request.outputs.data).head.ref }}"
+          echo "::set-output name=repo_name::${{ fromJson(steps.request.outputs.data).base.repo.full_name }}"
+          echo "::set-output name=repo_clone_url::${{ fromJson(steps.request.outputs.data).base.repo.clone_url }}"
+          echo "::set-output name=repo_ssh_url::${{ fromJson(steps.request.outputs.data).base.repo.ssh_url }}"
       - uses: khan/pull-request-comment-trigger@master
         id: check
         with:
@@ -63,11 +79,10 @@ jobs:
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
       - run: |
-            cat ${{github.event_path}}
             curl -u ${{ secrets.CIRCLE_TOKEN }}: -X  POST \
                -H 'Content-Type: application/json' \
                -H 'Accept: application/json' \
-               -d "{\"branch\":\"${{github.head_ref}}\", \
+               -d "{\"branch\":\"${{ steps.pr_data.outputs.branch }}\", \
                     \"parameters\": { \
                        \"deploy_prnet\": true , \
                        \"cleanup_prnet\": true , \
