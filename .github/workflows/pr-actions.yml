@@ -6,6 +6,22 @@ on:
     types: [created]
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: khan/pull-request-comment-trigger@master
+        id: check
+        with:
+          trigger: '/test'
+          reaction: rocket
+        env:
+          GITHUB_TOKEN: '{{ secrets.GITHUB_TOKEN }}' 
+      - uses: circleci/prnet
+        id: trigger
+        with:
+          pull_request_url: ${{ github.event.issue_pull_request.url }}
+          action: 'cleanup_prnet'
+          circleci_slug: 'gh/Taraxa-Project/taraxa-node'
   deploy:
     runs-on: ubuntu-latest
     steps:

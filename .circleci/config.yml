@@ -24,6 +24,7 @@ parameters:
 orbs:
   git: opuscapita/git@0.0.3
   github-release: izumin5210/github-release@0.1.1
+
   gcp-gcr: circleci/gcp-gcr@0.13.0
 
 commands:
@@ -461,7 +462,7 @@ workflows:
   deploy-prnet:
     when: 
       and: 
-        - equal: [ true, << pipeline.parameters.deploy_prnet >> ]
+        - << pipeline.parameters.deploy_prnet >> 
         - << pipeline.parameters.pr_number >>
     jobs:
      - deploy-prnet:
@@ -470,7 +471,7 @@ workflows:
   redeploy-prnet:
     when: 
       and: 
-        - equal: [ true, << pipeline.parameters.redeploy_prnet >> ]
+        - << pipeline.parameters.redeploy_prnet >> 
         - << pipeline.parameters.pr_number >>
     jobs:
      - redeploy-prnet:
@@ -479,7 +480,7 @@ workflows:
   cleanup-prnet:
     when: 
       and: 
-        - equal: [ true, << pipeline.parameters.cleanup_prnet >> ]
+        - << pipeline.parameters.cleanup_prnet >> 
         - << pipeline.parameters.pr_number >>
     jobs:
      - cleanup-prnet:
