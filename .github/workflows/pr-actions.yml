@@ -63,7 +63,7 @@ jobs:
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
       - run: |
-            echo ${{github.event_name}}
+            echo ${{github.event_path}}
             curl -u ${{ secrets.CIRCLE_TOKEN }}: -X  POST \
                -H 'Content-Type: application/json' \
                -H 'Accept: application/json' \
