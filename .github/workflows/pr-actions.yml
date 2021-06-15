@@ -55,7 +55,7 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
-     - name: GitHub API Request
+      - name: GitHub API Request
         if: steps.check.outputs.triggered == 'true'
         id: request
         uses: octokit/request-action@v2.0.0
