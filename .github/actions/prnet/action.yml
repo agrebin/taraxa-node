@@ -22,12 +22,7 @@ runs:
   using: "composite"
   steps:
       - id: pr_data
-        run: |
-          echo "::set-output name=branch::${{ fromJson(inputs.pull_request.data).head.ref }}"
-          echo "::set-output name=repo_name::${{ fromJson(inputs.pull_request.data).base.repo.full_name }}"
-          echo "::set-output name=repo_clone_url::${{ fromJson(inputs.pull_request.data).base.repo.clone_url }}"
-          echo "::set-output name=repo_ssh_url::${{ fromJson(inputs.pull_request.data).base.repo.ssh_url }}"
-          echo "::set-output name=number::${{ fromJson(inputs.pull_request.data).number }}"
+        run: echo "::set-output name=branch::${{ fromJson(inputs.pull_request.data).head.ref }}"
         shell: bash
       - run: |
             curl -u ${{ inputs.circle_token }}: -X  POST \
