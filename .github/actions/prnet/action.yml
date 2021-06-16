@@ -21,6 +21,7 @@ outputs:
 runs:
   using: "composite"
   steps:
+      - run: echo ${{ inputs.pull_request.data }}
       - name: Get PR informations
         id: pr_data
         run: |
