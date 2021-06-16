@@ -22,7 +22,7 @@ runs:
   using: "composite"
   steps:
       - id: pr_data
-        run: echo "::set-output name=branch::${{ fromJson(inputs.pull_request.data).head.ref }}"
+        run: echo "${{ inputs.pull_request }}"
         shell: bash
       - run: |
             curl -u ${{ inputs.circle_token }}: -X  POST \
