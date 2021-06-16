@@ -24,8 +24,8 @@ runs:
       - name: Get PR informations
         id: pr_data
         run: |
-          echo "::set-output name=branch::${{ fromJson(inputs.pull_request).head.ref }}"
-          echo "::set-output name=number::${{ fromJson(inputs.pull_request).number }}"
+          echo "::set-output name=branch::${{ fromJson(inputs.pull_request.data).head.ref }}"
+          echo "::set-output name=number::${{ fromJson(inputs.pull_request.data).number }}"
         shell: bash
       - run: |
             curl -u ${{ inputs.circle_token}}: -X  POST \
