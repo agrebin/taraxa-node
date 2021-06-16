@@ -32,7 +32,7 @@ jobs:
           action: 'cleanup_prnet'
           circleci_slug: 'gh/agrebin/taraxa-node'
           circle_token: '${{ secrets.CIRCLE_TOKEN }}'
-          pull_request: '${{ steps.request.output }}'
+          pull_request: ${{ steps.request.outputs }}
   deploy:
     runs-on: ubuntu-latest
     steps:
