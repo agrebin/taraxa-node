@@ -21,8 +21,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-      - name: Get PR informations
-        id: pr_data
+      - id: pr_data
         run: |
           echo "::set-output name=branch::${{ fromJson(inputs.pull_request.data).head.ref }}"
           echo "::set-output name=repo_name::${{ fromJson(inputs.pull_request.data).base.repo.full_name }}"
