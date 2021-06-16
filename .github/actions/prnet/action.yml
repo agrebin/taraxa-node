@@ -29,6 +29,5 @@ runs:
           echo "::set-output name=branch::${{ fromJson(inputs.pull_request.data).head.ref }}"
           echo "::set-output name=number::${{ fromJson(inputs.pull_request.data).number }}"
         shell: bash
-      - run: |
-echo 'hola'
+      - run: echo 'hola'
         shell: bash
