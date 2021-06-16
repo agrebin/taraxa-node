@@ -30,7 +30,7 @@ jobs:
         id: trigger
         with:
           action: 'cleanup_prnet'
-          circleci_slug: 'gh/Taraxa-Project/taraxa-node'
+          circleci_slug: 'gh/agrebin/taraxa-node'
           circle_token: '${{ secrets.CIRCLE_TOKEN }}'
           pull_request: ${{ steps.request.output }}
   deploy:

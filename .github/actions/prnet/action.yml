@@ -22,6 +22,7 @@ runs:
   using: "composite"
   steps:
       - run: echo ${{ inputs.pull_request.data }}
+        shell: bash
       - name: Get PR informations
         id: pr_data
         run: |
