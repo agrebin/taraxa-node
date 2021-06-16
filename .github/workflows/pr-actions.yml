@@ -19,6 +19,7 @@ jobs:
       - uses: actions/checkout@v1
         with: 
          ref: develop
+        if: steps.check.outputs.triggered == 'true'
       - name: GitHub API Request
         id: request
         uses: octokit/request-action@v2.0.0
@@ -26,6 +27,7 @@ jobs:
           route: ${{ github.event.issue.pull_request.url }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: steps.check.outputs.triggered == 'true'
       - uses: ./.github/actions/prnet
         id: trigger
         with:
@@ -33,6 +35,7 @@ jobs:
           circleci_slug: 'gh/agrebin/taraxa-node'
           circle_token: '${{ secrets.CIRCLE_TOKEN }}'
           pull_request: '${{ steps.request.outputs.data }}'
+        if: steps.check.outputs.triggered == 'true'
   deploy:
     runs-on: ubuntu-latest
     steps:
