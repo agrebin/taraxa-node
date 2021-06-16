@@ -21,7 +21,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-      - run: echo ${{ inputs.pull_request }}
+      - run: echo ${{ inputs.pull_request.data }}
         shell: bash
       - name: Get PR informations
         id: pr_data
@@ -29,5 +29,15 @@ runs:
           echo "::set-output name=branch::${{ fromJson(inputs.pull_request.data).head.ref }}"
           echo "::set-output name=number::${{ fromJson(inputs.pull_request.data).number }}"
         shell: bash
-      - run: echo 'hola'
+      - run: |
+            curl -u ${{ inputs.circle_token}}: -X  POST \
+               -H 'Content-Type: application/json' \
+               -H 'Accept: application/json' \
+               -d "{\"branch\":\"${{ steps.pr_data.outputs.branch }}\", \
+                    \"parameters\": { \
+                       \"${{ inputs.action }}\": true , \
+                       \"pr_number\": \"${{ steps.pr_data.outputs.number }}\"
+                       } \
+                   }" \
+               https://circleci.com/api/v2/project/${{ inputs.circleci_slug }}/pipeline
         shell: bash
