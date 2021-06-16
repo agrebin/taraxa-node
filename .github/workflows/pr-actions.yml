@@ -16,7 +16,10 @@ jobs:
           reaction: rocket
         env:
           GITHUB_TOKEN: '{{ secrets.GITHUB_TOKEN }}' 
-      - uses: circleci/prnet
+      - uses: actions/checkout@v1
+        with: 
+         ref: develop
+      - uses: ./.github/actions/prnet
         id: trigger
         with:
           pull_request_url: ${{ github.event.issue_pull_request.url }}
